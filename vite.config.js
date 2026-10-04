@@ -18,5 +18,15 @@ export default defineConfig(({ mode }) => {
       outDir: 'dist',
       sourcemap: true,
     },
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: './src/test/setup.js',
+      css: false,
+      coverage: {
+        reporter: ['text', 'html'],
+        include: ['src/data/**/*.js'],
+      },
+    },
   }
 })

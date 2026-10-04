@@ -37,7 +37,8 @@ see who is in them.
 | Language    | JavaScript (JSX)   | Application code                     |
 | Linting     | ESLint 9           | Static code analysis                 |
 | Formatting  | Prettier 3         | Consistent code style                |
-| CI/CD       | GitHub Actions     | Lint, build and deploy automatically |
+| Testing     | Vitest 2 + Testing Library | Unit and integration tests    |
+| CI/CD       | GitHub Actions     | Lint, test, build and deploy automatically |
 | Hosting     | GitHub Pages       | Static hosting of the built app      |
 
 ## Project Structure
@@ -56,7 +57,10 @@ warrigal-register/
 │   ├── config/config.js   # Central, environment-driven configuration
 │   ├── data/
 │   │   ├── domain.js      # Domain rules (junior / guardian rule, age groups)
-│   │   └── store.js       # Data access layer (CRUD + invariants, localStorage)
+│   │   ├── domain.test.js # Unit tests for domain rules
+│   │   ├── store.js       # Data access layer (CRUD + invariants, localStorage)
+│   │   └── store.test.js  # Integration tests for the data layer
+│   ├── test/setup.js      # Vitest setup (jest-dom matchers, localStorage reset)
 │   ├── styles/app.css     # Global styles
 │   ├── App.jsx            # Root component and navigation
 │   └── main.jsx           # Application entry point
@@ -91,10 +95,13 @@ npm run dev
 ### Other scripts
 
 ```bash
-npm run build     # Create a production build in ./dist
-npm run preview   # Preview the production build locally
-npm run lint      # Run ESLint
-npm run format    # Format all files with Prettier
+npm run build        # Create a production build in ./dist
+npm run preview      # Preview the production build locally
+npm run lint         # Run ESLint
+npm run format       # Format all files with Prettier
+npm test             # Run the test suite once (Vitest)
+npm run test:watch   # Run tests in watch mode
+npm run test:coverage # Run tests with coverage report
 ```
 
 ## Configuration
@@ -112,6 +119,32 @@ See [`.env.example`](.env.example) for the full list with explanations.
 
 To override locally, copy `.env.example` to `.env.local` and edit the values.
 `.env*` files are excluded from version control by `.gitignore`.
+
+## Testing
+
+The project uses **Vitest** as the test runner and **Testing Library** for
+component-level assertions. Tests are co-located with the source files they
+cover (`*.test.js`).
+
+```bash
+npm test              # Run all tests once
+npm run test:watch    # Re-run on file changes
+npm run test:coverage # Generate a coverage report
+```
+
+### What is covered
+
+- **`src/data/domain.test.js`** — unit tests for the core domain rules:
+  age calculation (including birthday-on-season-start boundary), junior
+  detection, the guardian-required registration rule, and age-group labels.
+- **`src/data/store.test.js`** — integration tests for the data access layer
+  against a real (jsdom) localStorage: member/guardian/registration/team
+  CRUD, the junior-without-guardian refusal, team placement requiring a
+  complete registration, roster contact resolution, and withdrawal removing
+  placements.
+
+The CI pipeline runs `npm test` on every push and pull request, so a failing
+test blocks the build.
 
 ## Deployment
 
