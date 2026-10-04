@@ -1,0 +1,31 @@
+{
+  "name": "warrigal-register",
+  "version": "1.0.0",
+  "description": "Warrigal Park Football Club - member registration and team roster system built with React and Vite, deployed to GitHub Pages.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "eslint": "^9.13.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "globals": "^15.11.0",
+    "prettier": "^3.3.3",
+    "vite": "^5.4.9"
+  }
+}
