@@ -18,6 +18,25 @@ export default [
     },
   },
   {
+    files: ['**/*.test.js', 'src/test/**'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+        vi: 'readonly',
+      },
+      sourceType: 'module',
+    },
+  },
+  {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
       ecmaVersion: 2020,
