@@ -1,3 +1,7 @@
+## [Unreleased]
+- Improve: expand deployment & environment configuration notes
+- Add: extra comments for environment configuration guidance
+
 # Changelog
 
 All notable changes to the Warrigal Park FC registration system are documented
