@@ -150,3 +150,6 @@ See [docs/branching-strategy.md](docs/branching-strategy.md) for details.
 ## License
 
 Distributed under the MIT License. See [LICENSE](LICENSE).
+## Deployment Configuration Notes
+This project uses environment variables stored within .env.example for deployment configuration.
+Before deployment, please copy .env.example and rename it to .env, fill in actual project values.
